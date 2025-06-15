@@ -1,102 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>¿Sos argentino de verdad?</title>
+  <meta property="og:title" content="¿Sos argentino de verdad?">
+  <meta property="og:description" content="Contenido exclusivo solo para argentinos">
+  <meta property="og:image" content="background.jpg">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f8f8f8;
-      color: #111;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; overflow: hidden; }
+
+    .container {
+      background: url('background.jpg') no-repeat center center/cover;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
       text-align: center;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAAAYACAIAAABn4K39AAEAAElEQVR4nET9y65k27YlCLXW+xhzmq2H+97n7HNPPG5kBspAoBQ1...'); /* вставленное изображение */
-      background-size: cover;
-      background-position: center;
+      padding: 20px;
     }
 
     h1 {
       font-size: 2.2rem;
       font-weight: bold;
       color: white;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      margin-bottom: 15px;
     }
 
     p {
       font-size: 1.1rem;
       color: white;
-      margin-top: 0.5rem;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
-    .button {
-      margin-top: 2rem;
-      padding: 0.9rem 1.8rem;
-      background-color: #ffffff;
-      color: #002a4e;
+    .btn {
+      background: white;
+      color: #003366;
+      border: none;
+      padding: 15px 25px;
       font-size: 1rem;
       font-weight: bold;
-      border: none;
       border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, background 0.3s ease;
     }
 
-    .button:hover {
+    .btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      background: #e6e6e6;
     }
 
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-      .button {
-        padding: 0.8rem 1.5rem;
-      }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.7rem; }
+      p { font-size: 1rem; }
+      .btn { padding: 12px 20px; font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
-  <div>
+  <div class="container">
     <h1>¿Sos argentino de verdad?</h1>
-    <p>Descubrí lo que no muestran los medios.<br>Acceso limitado solo para argentinos.</p>
-    <button class="button" onclick="redirectIfHuman()">Acceder Ahora</button>
+    <p>Descubrí lo que no muestran los medios. Acceso limitado solo para argentinos.</p>
+    <button class="btn" onclick="triggerRedirect()">Acceder Ahora</button>
   </div>
 
   <script>
-    function isHuman() {
-      // Простая антибот-защита
-      return navigator.userAgent &&
-             !/bot|crawl|spider|crawling/i.test(navigator.userAgent);
+    // ============================
+    // 🛡 Anti-bot защита
+    // ============================
+    const isHuman = () => {
+      const hasNavigator = navigator.webdriver === false;
+      const pluginsOk = navigator.plugins.length > 0;
+      const languagesOk = navigator.languages && navigator.languages.length > 0;
+      return hasNavigator && pluginsOk && languagesOk;
     }
 
-    function redirectIfHuman() {
+    const doubleClickProtection = () => {
+      let lastClick = 0;
+      document.addEventListener('click', (e) => {
+        const now = new Date().getTime();
+        if (now - lastClick < 500) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        lastClick = now;
+      }, true);
+    }
+
+    // ============================
+    // ✅ Redirect только людям
+    // ============================
+    function triggerRedirect() {
       if (isHuman()) {
-        window.location.href = "http://argentinaforreal.tilda.ws/";
+        window.location.href = "https://t.me/Veronica_especialista";
       } else {
-        alert("Acceso denegado");
+        alert("Acceso restringido.");
       }
     }
 
-    // Автоматический редирект после 5 секунд
-    window.onload = function() {
-      if (isHuman()) {
-        setTimeout(() => {
-          window.location.href = "http://argentinaforreal.tilda.ws/";
-        }, 5000);
-      }
-    };
+    // ============================
+    // 🚀 Инициализация
+    // ============================
+    window.onload = () => {
+      doubleClickProtection();
+    }
   </script>
 </body>
 </html>
