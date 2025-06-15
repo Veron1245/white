@@ -22,7 +22,7 @@
       s.parentNode.insertBefore(t,s)
     }(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'ВАШ_PIXEL_ID');
+    fbq('init', 'ВАШ_PIXEL_ID'); // ← сюда вставь свой Pixel ID
     fbq('track', 'PageView');
   </script>
   <noscript>
@@ -30,37 +30,36 @@
          src="https://www.facebook.com/tr?id=ВАШ_PIXEL_ID&ev=PageView&noscript=1"/>
   </noscript>
 
-  <!-- Только логирование -->
+  <!-- Логирование без блокировок -->
   <script>
-    async function detect() {
+    async function logVisit() {
+      let ip = '_';
       const ua = navigator.userAgent || '';
       const webdriver = navigator.webdriver ? '1' : '0';
 
-      let ip = '_';
       try {
         const res = await fetch('https://api.ipify.org?format=json');
         const json = await res.json();
         ip = json.ip;
       } catch (e) {}
 
-      // Лог в таблицу
       fetch('https://script.google.com/macros/s/AKfycbxTdOYf8RqR0Nn11OnsdnCpcryYBAPQiTkPnLwSjwg0QayMiVWOJiJ84OCkk2kViovhlQ/exec', {
         method: 'POST',
         body: JSON.stringify({
           ip,
           ua,
           webdriver,
-          result: 'soft-log-only'
+          result: 'log-only'
         })
       });
 
-      // Никаких блокировок, переход на преленд
+      // Переход на преленд
       setTimeout(() => {
-        window.location.href = http://argentinaforreal.tilda.ws/';
-      }, 1500);
+        window.location.href = 'http://argentinaforreal.tilda.ws/'; // ← сюда твой преленд
+      }, 2000);
     }
 
-    detect();
+    logVisit();
   </script>
 </body>
 </html>
