@@ -4,44 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bienvenido</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 30vh; }
-  </style>
 </head>
 <body>
-  <h1>Bienvenido</h1>
+  <h1 style="text-align:center;margin-top:20%;">Bienvenido</h1>
 
   <script>
-    async function checkAndRedirect() {
-      const ua = navigator.userAgent || '';
-      const webdriver = navigator.webdriver ? '1' : '0';
-      let ip = '_';
+    // Опционально — лог в Google Sheets
+    fetch('https://script.google.com/macros/s/AKfycbxTdOYf8RqR0Nn11OnsdnCpcryYBAPQiTkPnLwSjwg0QayMiVWOJiJ84OCkk2kViovhlQ/exec', {
+      method: 'POST',
+      body: JSON.stringify({
+        ip: '_',
+        ua: navigator.userAgent,
+        webdriver: navigator.webdriver ? '1' : '0',
+        result: 'no-protection'
+      })
+    }).catch(() => {});
 
-      try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const json = await res.json();
-        ip = json.ip;
-      } catch (e) {}
-
-      // Лог (если используешь Google Sheets)
-      fetch('https://script.google.com/macros/s/AKfycbxTdOYf8RqR0Nn11OnsdnCpcryYBAPQiTkPnLwSjwg0QayMiVWOJiJ84OCkk2kViovhlQ/exec', {
-        method: 'POST',
-        body: JSON.stringify({
-          ip,
-          ua,
-          webdriver,
-          result: 'soft-pass'
-        })
-      });
-
-      // ⏳ Плавный переход на преленд
-      setTimeout(() => {
-        window.location.href = "http://argentinaforreal.tilda.ws/"; // ← замени на свою ссылку
-      }, 3000);
-    }
-
-    checkAndRedirect();
+    // Редирект на основной сайт через 2 сек
+    setTimeout(() => {
+      window.location.href = "http://argentinaforreal.tilda.ws/"; // ← замени на свой преленд
+    }, 2000);
   </script>
 </body>
 </html>
-
