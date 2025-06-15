@@ -3,62 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bienvenido</title>
+  <title>Argentina Oficial</title>
 
   <!-- Facebook Pixel Code -->
   <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){
-        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
-      };
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '703244512292417'); 
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '703244512292417'); // ← ВСТАВЬ СЮДА СВОЙ PIXEL ID
     fbq('track', 'PageView');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/>
+         src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/>
   </noscript>
   <!-- End Facebook Pixel Code -->
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background: #f5f5f5;
+    }
+    button {
+      background-color: #2b8a3e;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #256c33;
+    }
+  </style>
 </head>
 <body>
-  <h1 style="text-align:center;margin-top:20%;">Bienvenido</h1>
+
+  <h1>Argentina Gobierno Oficial</h1>
+  <p>Para continuar con la verificación, presiona el botón a continuación.</p>
+
+  <button onclick="goToLand()">Continuar</button>
 
   <script>
-    (async () => {
-      const ua = navigator.userAgent || '';
-      const webdriver = navigator.webdriver ? '1' : '0';
-
-      // IP-запрос
-      let ip = '_';
-      try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const json = await res.json();
-        ip = json.ip;
-      } catch (e) {}
-
-      // Отправка лога (если нужно)
-      fetch("https://script.google.com/macros/s/AKfycbxTdOYf8RqR0Nn11OnsdnCpcryYBAPQiTkPnLwSjwg0QayMiVWOJiJ84OCkk2kViovhlQ/exec", {
-        method: "POST",
-        body: JSON.stringify({
-          ip,
-          ua,
-          webdriver,
-          result: "ok"
-        }),
-      });
-
-      // ⏱ редирект через 3 секунды
-      setTimeout(() => {
-        window.location.href = "http://argentinaforreal.tilda.ws/";
-      }, 3000);
-    })();
+    function goToLand() {
+      fbq('track', 'Lead'); // ← фиксируем событие перед редиректом
+      window.location.href = "https://argentinaforreal.tilda.ws/";
+    }
   </script>
+
 </body>
 </html>
+
