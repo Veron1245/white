@@ -2,11 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Acceso Exclusivo - Argentina</title>
   <meta name="description" content="Contenido exclusivo solo para argentinos.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
@@ -27,8 +31,8 @@
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.3em;
+      font-size: 2.3em;
+      margin-bottom: 0.5em;
       color: #fff;
     }
 
@@ -41,19 +45,22 @@
     .btn {
       background-color: #fff;
       color: #003865;
-      border: none;
       padding: 15px 30px;
       font-size: 1.1em;
-      border-radius: 10px;
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
       text-decoration: none;
       font-weight: bold;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: inline-block;
     }
 
     .btn:hover {
       background-color: #003865;
       color: #fff;
+      transform: scale(1.05);
     }
 
     footer {
@@ -61,6 +68,27 @@
       text-align: center;
       font-size: 0.9em;
       color: #888;
+      background-color: #f0f0f0;
+    }
+
+    @media screen and (max-width: 600px) {
+      header {
+        height: 200px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      .btn {
+        width: 90%;
+        font-size: 1em;
+        padding: 12px;
+      }
     }
   </style>
 </head>
@@ -79,29 +107,32 @@
   </footer>
 
   <script>
-    // Антибот-защита
+    // 🛡️ Антибот-защита
     const ua = navigator.userAgent || '';
     const isBot = /bot|crawl|spider|facebook|preview/i.test(ua) || navigator.webdriver;
     if (isBot) document.body.innerHTML = '';
 
-    // Facebook Pixel
-    !function(f,b,e,v,n,t,s) {
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
-      n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
+    // 🎯 Facebook Pixel
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
       if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
       n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)
     }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '703244512292417'); 
+    fbq('init', '703244512292417');
     fbq('track', 'PageView');
   </script>
   <noscript>
-    <img height="1" width="1" style="display:none" 
+    <img height="1" width="1" style="display:none"
          src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/>
   </noscript>
+
 </body>
 </html>
+
+
 
 
 
