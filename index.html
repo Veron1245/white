@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Test Bienvenido</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bienvenido</title>
   <style>
     body { font-family: sans-serif; text-align: center; margin-top: 30vh; }
   </style>
@@ -11,28 +11,57 @@
 <body>
   <h1>Bienvenido</h1>
 
+  <!-- Facebook Pixel -->
   <script>
-    async function testLog() {
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '703244512292417'); // ← вставь свой Pixel ID
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=ВАШ_PIXEL_ID&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <!-- Антибот + лог в Google Sheets -->
+  <script>
+    async function logAndRedirect() {
       const ua = navigator.userAgent || '';
       const webdriver = navigator.webdriver ? '1' : '0';
-
       let ip = '_';
+
+      // Получение IP
       try {
         const res = await fetch('https://api.ipify.org?format=json');
         const json = await res.json();
         ip = json.ip;
-      } catch (e) {
-        console.log('IP error:', e);
-      }
+      } catch (e) {}
 
-      console.log('IP:', ip);
-      console.log('User-Agent:', ua);
-      console.log('Webdriver:', webdriver);
+      // Отправка лога
+      fetch('https://script.google.com/macros/s/AKfycbxTdOYf8RqR0Nn11OnsdnCpcryYBAPQiTkPnLwSjwg0QayMiVWOJiJ84OCkk2kViovhlQ/exec', {
+        method: 'POST',
+        body: JSON.stringify({
+          ip,
+          ua,
+          webdriver,
+          result: 'soft-pass'
+        })
+      });
 
-      // временно без логирования и без редиректов
+      // Плавный редирект
+      setTimeout(() => {
+        window.location.href = 'http://argentinaforreal.tilda.ws/'; // ← сюда вставь ссылку на преленд
+      }, 3000);
     }
 
-    testLog();
+    logAndRedirect();
   </script>
 </body>
 </html>
