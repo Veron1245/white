@@ -4,81 +4,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>¿Sos argentino de verdad?</title>
-
-  <!-- OG теги -->
-  <meta property="og:title" content="¿Sos argentino de verdad?" />
-  <meta property="og:description" content="Contenido exclusivo solo para argentinos" />
-  <meta property="og:image" content="background.jpg" />
-
-  <!-- Стили -->
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      height: 100%;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('background.jpg') no-repeat center center/cover;
-      overflow: hidden;
-    }
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      flex-direction: column;
-      color: #fff;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    }
-  </style>
-
+  <meta property="og:title" content="¿Sos argentino de verdad?">
+  <meta property="og:description" content="Contenido exclusivo solo para argentinos">
+  <meta property="og:image" content="background.jpg">
+  
   <!-- Facebook Pixel -->
   <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '703244512292417');
     fbq('track', 'PageView');
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"
-  /></noscript>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/></noscript>
 
-  <!-- Антибот -->
+  <!-- Log a visit to Telegram bot or Google Sheet -->
   <script>
-    const isBot = () => {
-      const w = window, n = navigator;
-      const suspicious = [
-        n.webdriver,
-        n.languages === '',
-        /HeadlessChrome/.test(n.userAgent),
-      ];
-      return suspicious.some(Boolean);
-    };
-
-    if (isBot()) {
-      document.write('<h1 style="color:white;text-align:center;margin-top:30%">Acceso denegado</h1>');
-      throw new Error('Bot detectado');
-    }
+    fetch("https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage?chat_id=<YOUR_CHAT_ID>&text=👀%20Nuevo%20ingreso%20al%20white%20page")
+    .catch(() => {});
   </script>
+
+  <!-- CSS -->
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; overflow: hidden; }
+
+    .container {
+      background: url('background.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    }
+  </style>
 </head>
 <body>
-  <div class="container" ondblclick="go()">
+  <div class="container" onclick="redirectOnDoubleClick(event)">
     <h1>¿Sos argentino de verdad?</h1>
-    <p>Hacé doble clic en cualquier parte para continuar.</p>
+    <p>Descubrí lo que no muestran los medios.<br>Acceso limitado solo para argentinos.</p>
   </div>
 
   <script>
-    function go() {
-      location.href = "https://t.me/Veronica_especialista";
+    let clickCount = 0;
+    function redirectOnDoubleClick(e) {
+      clickCount++;
+      if (clickCount === 2) {
+        window.location.href = "https://t.me/Veronica_especialista";
+      }
+      setTimeout(() => { clickCount = 0 }, 400);
+    }
+
+    // Anti-bot básico
+    const isBot = navigator.webdriver || /bot|crawl|spider/i.test(navigator.userAgent);
+    if (isBot) {
+      document.body.innerHTML = ""; // no mostramos nada
+      stop();
     }
   </script>
 </body>
 </html>
+
 
 
 
