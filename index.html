@@ -2,113 +2,105 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Acceso Exclusivo - Argentina</title>
-  <meta name="description" content="Contenido exclusivo solo para argentinos.">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¿Sos argentino de verdad?</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: #f4f4f4;
-    }
-
-    .hero {
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABdYAAAPiCAYAAAA...'); /* ← тут твоя фотка вшита */
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f8f8;
+      color: #111;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       text-align: center;
-      padding: 0 20px;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAAAYACAIAAABn4K39AAEAAElEQVR4nET9y65k27YlCLXW+xhzmq2H+97n7HNPPG5kBspAoBQ1...'); /* вставленное изображение */
+      background-size: cover;
+      background-position: center;
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
     }
 
     p {
-      font-size: 1.2em;
-      margin-bottom: 2em;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      font-size: 1.1rem;
+      color: white;
+      margin-top: 0.5rem;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
     }
 
-    .btn {
+    .button {
+      margin-top: 2rem;
+      padding: 0.9rem 1.8rem;
       background-color: #ffffff;
-      color: #003865;
-      padding: 15px 30px;
-      font-size: 1.1em;
+      color: #002a4e;
+      font-size: 1rem;
+      font-weight: bold;
       border: none;
       border-radius: 10px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
-    .btn:hover {
-      background-color: #003865;
-      color: #ffffff;
+    .button:hover {
       transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     }
 
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9em;
-      background-color: #fafafa;
-      color: #666;
-    }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 2em; }
-      p { font-size: 1em; }
-      .btn { width: 90%; }
-      .hero { height: 90vh; }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      .button {
+        padding: 0.8rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="hero">
+  <div>
     <h1>¿Sos argentino de verdad?</h1>
-    <p>Descubrí lo que no muestran los medios. Acceso limitado solo para argentinos.</p>
-    <a href="https://t.me/Veronica_especialista" class="btn">Acceder Ahora</a>
+    <p>Descubrí lo que no muestran los medios.<br>Acceso limitado solo para argentinos.</p>
+    <button class="button" onclick="redirectIfHuman()">Acceder Ahora</button>
   </div>
 
-  <footer>
-    Contenido exclusivo solo para argentinos 🇦🇷
-  </footer>
-
   <script>
-    // 🛡️ Anti-bot protection
-    const ua = navigator.userAgent.toLowerCase();
-    const isBot = /bot|crawl|facebook|preview|spider/.test(ua) || navigator.webdriver;
-    if (isBot) {
-      document.body.innerHTML = '';
+    function isHuman() {
+      // Простая антибот-защита
+      return navigator.userAgent &&
+             !/bot|crawl|spider|crawling/i.test(navigator.userAgent);
     }
 
-    // 📊 Facebook Pixel
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '703244512292417');
-    fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/></noscript>
+    function redirectIfHuman() {
+      if (isHuman()) {
+        window.location.href = "http://argentinaforreal.tilda.ws/";
+      } else {
+        alert("Acceso denegado");
+      }
+    }
 
+    // Автоматический редирект после 5 секунд
+    window.onload = function() {
+      if (isHuman()) {
+        setTimeout(() => {
+          window.location.href = "http://argentinaforreal.tilda.ws/";
+        }, 5000);
+      }
+    };
+  </script>
 </body>
 </html>
+
 
 
 
