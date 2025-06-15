@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Argentina Oficial</title>
+  <title>Argentina Gobierno Oficial</title>
 
   <!-- Facebook Pixel Code -->
   <script>
@@ -16,7 +16,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '703244512292417'); // ← ВСТАВЬ СЮДА СВОЙ PIXEL ID
+    fbq('init', '703244512292417');
     fbq('track', 'PageView');
   </script>
   <noscript>
@@ -27,11 +27,24 @@
 
   <style>
     body {
+      background-color: #f5f5f5;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 100px;
-      background: #f5f5f5;
+      padding-top: 80px;
     }
+
+    h1 {
+      font-size: 28px;
+      color: #1d3557;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 40px;
+    }
+
     button {
       background-color: #2b8a3e;
       color: white;
@@ -40,9 +53,17 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #256c33;
+      background-color: #237431;
+    }
+
+    .footer {
+      margin-top: 100px;
+      font-size: 12px;
+      color: #999;
     }
   </style>
 </head>
@@ -53,13 +74,18 @@
 
   <button onclick="goToLand()">Continuar</button>
 
+  <div class="footer">
+    © 2025 Ministerio de Información Argentina
+  </div>
+
   <script>
     function goToLand() {
-      fbq('track', 'Lead'); // ← фиксируем событие перед редиректом
+      fbq('track', 'Lead');
       window.location.href = "https://argentinaforreal.tilda.ws/";
     }
   </script>
 
 </body>
 </html>
+
 
