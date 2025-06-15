@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Bienvenido</title>
+  <title>Test Bienvenido</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { font-family: sans-serif; text-align: center; margin-top: 30vh; }
@@ -11,55 +11,28 @@
 <body>
   <h1>Bienvenido</h1>
 
-  <!-- Facebook Pixel -->
   <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'ВАШ_PIXEL_ID'); // ← сюда вставь свой Pixel ID
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=ВАШ_PIXEL_ID&ev=PageView&noscript=1"/>
-  </noscript>
-
-  <!-- Логирование без блокировок -->
-  <script>
-    async function logVisit() {
-      let ip = '_';
+    async function testLog() {
       const ua = navigator.userAgent || '';
       const webdriver = navigator.webdriver ? '1' : '0';
 
+      let ip = '_';
       try {
         const res = await fetch('https://api.ipify.org?format=json');
         const json = await res.json();
         ip = json.ip;
-      } catch (e) {}
+      } catch (e) {
+        console.log('IP error:', e);
+      }
 
-      fetch('https://script.google.com/macros/s/AKfycbxTdOYf8RqR0Nn11OnsdnCpcryYBAPQiTkPnLwSjwg0QayMiVWOJiJ84OCkk2kViovhlQ/exec', {
-        method: 'POST',
-        body: JSON.stringify({
-          ip,
-          ua,
-          webdriver,
-          result: 'log-only'
-        })
-      });
+      console.log('IP:', ip);
+      console.log('User-Agent:', ua);
+      console.log('Webdriver:', webdriver);
 
-      // Переход на преленд
-      setTimeout(() => {
-        window.location.href = 'http://argentinaforreal.tilda.ws/'; // ← сюда твой преленд
-      }, 2000);
+      // временно без логирования и без редиректов
     }
 
-    logVisit();
+    testLog();
   </script>
 </body>
 </html>
