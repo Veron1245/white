@@ -11,40 +11,19 @@
 <body>
   <h1>Bienvenido</h1>
 
-  <!-- Facebook Pixel -->
   <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '703244512292417'); // ← вставь свой Pixel ID
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=ВАШ_PIXEL_ID&ev=PageView&noscript=1"/>
-  </noscript>
-
-  <!-- Антибот + лог в Google Sheets -->
-  <script>
-    async function logAndRedirect() {
+    async function checkAndRedirect() {
       const ua = navigator.userAgent || '';
       const webdriver = navigator.webdriver ? '1' : '0';
       let ip = '_';
 
-      // Получение IP
       try {
         const res = await fetch('https://api.ipify.org?format=json');
         const json = await res.json();
         ip = json.ip;
       } catch (e) {}
 
-      // Отправка лога
+      // Лог (если используешь Google Sheets)
       fetch('https://script.google.com/macros/s/AKfycbxTdOYf8RqR0Nn11OnsdnCpcryYBAPQiTkPnLwSjwg0QayMiVWOJiJ84OCkk2kViovhlQ/exec', {
         method: 'POST',
         body: JSON.stringify({
@@ -55,13 +34,14 @@
         })
       });
 
-      // Плавный редирект
+      // ⏳ Плавный переход на преленд
       setTimeout(() => {
-        window.location.href = 'http://argentinaforreal.tilda.ws/'; // ← сюда вставь ссылку на преленд
+        window.location.href = "http://argentinaforreal.tilda.ws/"; // ← замени на свою ссылку
       }, 3000);
     }
 
-    logAndRedirect();
+    checkAndRedirect();
   </script>
 </body>
 </html>
+
