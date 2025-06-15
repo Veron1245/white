@@ -13,7 +13,18 @@
       background: linear-gradient(135deg, #00a8ff, #fcd116);
       color: #fff;
       text-align: center;
-      padding: 50px 20px;
+      padding: 0;
+    }
+
+    img.hero {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+    }
+
+    .content {
+      padding: 40px 20px;
     }
 
     h1 {
@@ -48,26 +59,32 @@
       margin-top: 40px;
       font-size: 0.9em;
       color: rgba(255,255,255,0.7);
+      padding-bottom: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>¿Sos argentino de verdad?</h1>
-  <p>Descubrí lo que no muestran los medios. Acceso limitado.</p>
-  <a href="https://t.me/Veronica_especialista" class="btn">Acceder Ahora</a>
+  <!-- Фото вверху -->
+  <img src="https://cdn.pixabay.com/photo/2020/07/01/21/59/buenos-aires-5361736_1280.jpg" alt="Argentina" class="hero">
 
-  <footer>Contenido exclusivo solo para argentinos 🇦🇷</footer>
+  <div class="content">
+    <h1>¿Sos argentino de verdad?</h1>
+    <p>Descubrí lo que no muestran los medios. Acceso limitado.</p>
+    <a href="https://t.me/Veronica_especialista" class="btn">Acceder Ahora</a>
+
+    <footer>Contenido exclusivo solo para argentinos 🇦🇷</footer>
+  </div>
 
   <script>
-    // Protección básica contra ботов
+    // Антибот-защита
     const ua = navigator.userAgent || '';
     const isBot = /bot|crawl|spider|facebook|preview/i.test(ua) || navigator.webdriver;
 
     if (isBot) {
-      document.body.innerHTML = ''; // не грузим контент для ботов
+      document.body.innerHTML = '';
     }
 
-    // Пиксель Facebook (если нужен вручную)
+    // Facebook Pixel
     !function(f,b,e,v,n,t,s) {
       if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
