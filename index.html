@@ -1,102 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Acceso Exclusivo - Argentina</title>
   <meta name="description" content="Contenido exclusivo solo para argentinos.">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: #f4f4f4;
-      color: #333;
+      background-color: #f4f4f4;
     }
 
-    header {
-      background: url('https://cdn.pixabay.com/photo/2020/07/01/21/59/buenos-aires-5361736_1280.jpg') no-repeat center center;
+    .hero {
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABdYAAAPiCAYAAAA...'); /* ← тут твоя фотка вшита */
       background-size: cover;
-      height: 300px;
-    }
-
-    .content {
+      background-position: center;
+      height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 40px 20px;
-      background: linear-gradient(to right, #00c6ff, #fbd72b);
+      padding: 0 20px;
     }
 
     h1 {
-      font-size: 2.3em;
+      font-size: 2.5em;
       margin-bottom: 0.5em;
-      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
     }
 
     p {
       font-size: 1.2em;
       margin-bottom: 2em;
-      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     .btn {
-      background-color: #fff;
+      background-color: #ffffff;
       color: #003865;
       padding: 15px 30px;
       font-size: 1.1em;
       border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      text-decoration: none;
+      border-radius: 10px;
       font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      display: inline-block;
+      text-decoration: none;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
 
     .btn:hover {
       background-color: #003865;
-      color: #fff;
+      color: #ffffff;
       transform: scale(1.05);
     }
 
     footer {
-      padding: 20px;
       text-align: center;
+      padding: 15px;
       font-size: 0.9em;
-      color: #888;
-      background-color: #f0f0f0;
+      background-color: #fafafa;
+      color: #666;
     }
 
-    @media screen and (max-width: 600px) {
-      header {
-        height: 200px;
-      }
-
-      h1 {
-        font-size: 1.8em;
-      }
-
-      p {
-        font-size: 1em;
-      }
-
-      .btn {
-        width: 90%;
-        font-size: 1em;
-        padding: 12px;
-      }
+    @media (max-width: 600px) {
+      h1 { font-size: 2em; }
+      p { font-size: 1em; }
+      .btn { width: 90%; }
+      .hero { height: 90vh; }
     }
   </style>
 </head>
 <body>
 
-  <header></header>
-
-  <div class="content">
+  <div class="hero">
     <h1>¿Sos argentino de verdad?</h1>
     <p>Descubrí lo que no muestran los medios. Acceso limitado solo para argentinos.</p>
     <a href="https://t.me/Veronica_especialista" class="btn">Acceder Ahora</a>
@@ -107,15 +87,16 @@
   </footer>
 
   <script>
-    // 🛡️ Антибот-защита
-    const ua = navigator.userAgent || '';
-    const isBot = /bot|crawl|spider|facebook|preview/i.test(ua) || navigator.webdriver;
-    if (isBot) document.body.innerHTML = '';
+    // 🛡️ Anti-bot protection
+    const ua = navigator.userAgent.toLowerCase();
+    const isBot = /bot|crawl|facebook|preview|spider/.test(ua) || navigator.webdriver;
+    if (isBot) {
+      document.body.innerHTML = '';
+    }
 
-    // 🎯 Facebook Pixel
+    // 📊 Facebook Pixel
     !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){
-        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
       if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
       n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];
@@ -124,10 +105,7 @@
     fbq('init', '703244512292417');
     fbq('track', 'PageView');
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/>
-  </noscript>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/></noscript>
 
 </body>
 </html>
