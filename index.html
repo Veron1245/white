@@ -4,110 +4,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>¿Sos argentino de verdad?</title>
-  <meta property="og:title" content="¿Sos argentino de verdad?">
-  <meta property="og:description" content="Contenido exclusivo solo para argentinos">
-  <meta property="og:image" content="background.jpg">
+
+  <!-- OG теги -->
+  <meta property="og:title" content="¿Sos argentino de verdad?" />
+  <meta property="og:description" content="Contenido exclusivo solo para argentinos" />
+  <meta property="og:image" content="background.jpg" />
+
+  <!-- Стили -->
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; overflow: hidden; }
-
-    .container {
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
       background: url('background.jpg') no-repeat center center/cover;
-      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-      margin-bottom: 15px;
-    }
-
-    p {
-      font-size: 1.1rem;
-      color: white;
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .btn {
-      background: white;
-      color: #003366;
-      border: none;
-      padding: 15px 25px;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      background: #e6e6e6;
-    }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 1.7rem; }
-      p { font-size: 1rem; }
-      .btn { padding: 12px 20px; font-size: 0.95rem; }
+      align-items: center;
+      height: 100%;
+      flex-direction: column;
+      color: #fff;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
     }
   </style>
+
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '703244512292417');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"
+  /></noscript>
+
+  <!-- Антибот -->
+  <script>
+    const isBot = () => {
+      const w = window, n = navigator;
+      const suspicious = [
+        n.webdriver,
+        n.languages === '',
+        /HeadlessChrome/.test(n.userAgent),
+      ];
+      return suspicious.some(Boolean);
+    };
+
+    if (isBot()) {
+      document.write('<h1 style="color:white;text-align:center;margin-top:30%">Acceso denegado</h1>');
+      throw new Error('Bot detectado');
+    }
+  </script>
 </head>
 <body>
-  <div class="container">
+  <div class="container" ondblclick="go()">
     <h1>¿Sos argentino de verdad?</h1>
-    <p>Descubrí lo que no muestran los medios. Acceso limitado solo para argentinos.</p>
-    <button class="btn" onclick="triggerRedirect()">Acceder Ahora</button>
+    <p>Hacé doble clic en cualquier parte para continuar.</p>
   </div>
 
   <script>
-    // ============================
-    // 🛡 Anti-bot защита
-    // ============================
-    const isHuman = () => {
-      const hasNavigator = navigator.webdriver === false;
-      const pluginsOk = navigator.plugins.length > 0;
-      const languagesOk = navigator.languages && navigator.languages.length > 0;
-      return hasNavigator && pluginsOk && languagesOk;
-    }
-
-    const doubleClickProtection = () => {
-      let lastClick = 0;
-      document.addEventListener('click', (e) => {
-        const now = new Date().getTime();
-        if (now - lastClick < 500) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        lastClick = now;
-      }, true);
-    }
-
-    // ============================
-    // ✅ Redirect только людям
-    // ============================
-    function triggerRedirect() {
-      if (isHuman()) {
-        window.location.href = "https://t.me/Veronica_especialista";
-      } else {
-        alert("Acceso restringido.");
-      }
-    }
-
-    // ============================
-    // 🚀 Инициализация
-    // ============================
-    window.onload = () => {
-      doubleClickProtection();
+    function go() {
+      location.href = "https://t.me/Veronica_especialista";
     }
   </script>
 </body>
