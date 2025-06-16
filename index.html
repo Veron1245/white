@@ -7,6 +7,26 @@
   <meta property="og:title" content="Consulta de beneficios en Argentina">
   <meta property="og:description" content="Información pública para ciudadanos argentinos">
   <meta property="og:image" content="background.jpg">
+  
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
+    n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script');
+
+    fbq('init', '703244512292417'); // ← ВСТАВЬ СВОЙ PIXEL ID
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1"
+    src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/>
+  </noscript>
+
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -64,6 +84,7 @@
 
     document.getElementById("accederBtn").addEventListener("click", () => {
       if (!isSuspicious()) {
+        fbq('track', 'Lead'); // ← Событие конверсии перед переходом
         window.location.href = targetURL;
       } else {
         alert("Acceso no disponible.");
@@ -72,6 +93,7 @@
   </script>
 </body>
 </html>
+
 
 
 
