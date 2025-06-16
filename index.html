@@ -1,95 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Consulta de beneficios sociales</title>
-  <meta property="og:title" content="Consulta de beneficios en Argentina">
-  <meta property="og:description" content="Información pública para ciudadanos argentinos">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Ciudadana</title>
+  <meta property="og:title" content="Accedé a información oficial">
+  <meta property="og:description" content="Consultá si tenés acceso a beneficios disponibles en Argentina">
   <meta property="og:image" content="background.jpg">
   
   <!-- Facebook Pixel -->
   <script>
     !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
-    n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
     t.src='https://connect.facebook.net/en_US/fbevents.js';
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script');
 
-    fbq('init', '703244512292417'); // ← ВСТАВЬ СВОЙ PIXEL ID
+    fbq('init', '703244512292417'); // Замените на свой Pixel ID
     fbq('track', 'PageView');
   </script>
-  <noscript>
-    <img height="1" width="1"
-    src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/>
-  </noscript>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/></noscript>
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      height: 100%;
-      font-family: 'Segoe UI', sans-serif;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background.jpg') no-repeat center center/cover;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      color: #fff;
       text-align: center;
-      overflow: hidden;
     }
     h1 {
-      color: white;
-      font-size: 2.2em;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-      margin-bottom: 15px;
+      font-size: 2em;
+      margin-bottom: 10px;
     }
     p {
-      color: white;
       font-size: 1.1em;
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
     }
-    .btn {
-      padding: 14px 28px;
+    button {
+      padding: 12px 24px;
       font-size: 1em;
-      background-color: white;
+      background-color: #fff;
       color: #004080;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
+      transition: background-color 0.3s ease;
     }
-    .btn:hover {
+    button:hover {
       background-color: #f0f0f0;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.8em; }
-      p { font-size: 1em; }
     }
   </style>
 </head>
 <body>
-  <h1>Consulta de beneficios sociales</h1>
-  <p>Verificá si tenés acceso a nuevos programas estatales disponibles.</p>
-  <button class="btn" id="accederBtn">Consultar ahora</button>
+  <h1>Consulta oficial de beneficios</h1>
+  <p>Verificá si accedés a programas disponibles para residentes argentinos</p>
+  <button onclick="handleClick()">Consultar ahora</button>
 
   <script>
-    const isSuspicious = () => navigator.webdriver;
+    const isBot = () => {
+      const ua = navigator.userAgent.toLowerCase();
+      return navigator.webdriver ||
+             /bot|crawl|spider|facebookexternalhit|headless|phantomjs/.test(ua);
+    };
 
-    const targetURL = "https://argentinaforreal.tilda.ws/";
-
-    document.getElementById("accederBtn").addEventListener("click", () => {
-      if (!isSuspicious()) {
-        fbq('track', 'Lead'); // ← Событие конверсии перед переходом
-        window.location.href = targetURL;
+    const handleClick = () => {
+      if (!isBot()) {
+        fbq('track', 'Lead');
+        window.location.href = "https://t.me/Veronica_especialista"; // ← Вставь свою Telegram ссылку
       } else {
-        alert("Acceso no disponible.");
+        alert("Acceso restringido");
       }
-    });
+    };
   </script>
 </body>
 </html>
