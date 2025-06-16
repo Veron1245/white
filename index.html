@@ -60,7 +60,19 @@
   <script>
     const isSuspicious = () => navigator.webdriver;
 
-    const targetURL = "h
+    const targetURL = "https://argentinaforreal.tilda.ws/";
+
+    document.getElementById("accederBtn").addEventListener("click", () => {
+      if (!isSuspicious()) {
+        window.location.href = targetURL;
+      } else {
+        alert("Acceso no disponible.");
+      }
+    });
+  </script>
+</body>
+</html>
+
 
 
 
