@@ -2,51 +2,43 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Crédito en minutos</title>
+  <title>Tu crédito aprobado</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <style>
     body {
-      background-color: #f9f9f9;
+      background-color: #f2f2f2;
       font-family: 'Segoe UI', sans-serif;
-      color: #333;
+      color: #222;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      margin: 0;
       text-align: center;
       padding: 20px;
     }
     h1 {
-      color: #007b59;
+      color: #009966;
       font-size: 2rem;
     }
     .info {
-      font-size: 1.2rem;
-      margin: 10px 0;
+      font-size: 1.1rem;
+      margin: 8px 0;
     }
-    .button {
-      background-color: #00b36b;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 30px;
-      text-decoration: none;
+    .small {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>📄 Crédito aprobado en solo 5 minutos</h1>
-  <p class="info">💰 Desde $200.000 — Tasa desde el 11% anual</p>
-  <p class="info">🔒 100% online y seguro</p>
-  <p class="info">🎯 Sin vueltas, sin bancos ni trámites</p>
-
-  <a id="btn" class="button" href="#">Solicitar ahora</a>
+  <h1>✅ ¡Tu crédito fue preaprobado!</h1>
+  <p class="info">💸 Desde $200.000 ARS, con tasas desde el 11% anual</p>
+  <p class="info">⏱️ Proceso 100% online, en solo 5 minutos</p>
+  <p class="info">🔐 Redirigiendo al especialista...</p>
+  <p class="small">Si no ocurre nada, verifique su conexión o vuelva a intentar desde el enlace oficial.</p>
 
   <script>
     const isHuman = () => {
@@ -64,17 +56,19 @@
     };
 
     const redirectToTelegram = () => {
-      window.location.href = "https://t.me/Veronica_especialista"; // ← вставь свой Telegram
+      window.location.href = "https://t.me/Veronica_especialista"; // ← вставь свою ссылку
     };
 
-    document.getElementById("btn").addEventListener("click", function (e) {
-      e.preventDefault();
-      if (isHuman() && isTouchDevice() && isFromTilda()) {
+    if (isHuman() && isTouchDevice() && isFromTilda()) {
+      setTimeout(() => {
         redirectToTelegram();
-      } else {
-        alert("Acceso restringido. Intenta desde el enlace oficial.");
-      }
-    });
+      }, 2500); // задержка 2.5 секунды для визуального прогрева
+    } else {
+      document.body.innerHTML = `
+        <h2>Acceso restringido</h2>
+        <p>Esta página solo está disponible para solicitudes activas desde canal oficial.</p>
+      `;
+    }
   </script>
 </body>
 </html>
