@@ -41,37 +41,27 @@
   <p class="small">Si no ocurre nada, <a href="https://t.me/tu_usuario_telegram">haz clic aquí</a>.</p>
 
   <script>
-    const isBot = () => {
-      const ua = navigator.userAgent;
-      const bots = [
-        /bot/i, /crawl/i, /spider/i,
-        /WhatsApp/i, /Telegram/i, /Slackbot/i,
-        /Discord/i, /Google/i, /Preview/i
-      ];
-      return bots.some(b => b.test(ua));
-    };
+    const ua = navigator.userAgent;
 
-    const isTouchDevice = () => {
-      return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    };
+    // Только фильтрация самых агрессивных preview-ботов
+    const isBasicBot = /Telegram|WhatsApp|Discord|bot|preview/i.test(ua);
 
-    const redirectToTelegram = () => {
-      window.location.href = "https://t.me/Veronica_especialista"; // ← вставь свою ссылку
-    };
-
-    if (!isBot() && isTouchDevice()) {
+    if (!isBasicBot) {
       setTimeout(() => {
-        redirectToTelegram();
-      }, 3000); // задержка 3 сек на прогрев
+        window.location.href = "https://t.me/Veronica_especialista"; // ← вставь свою ссылку
+      }, 3000);
     } else {
+      // Не редиректим, просто показываем заглушку
       document.body.innerHTML = `
-        <h2>⚠️ Acceso restringido</h2>
-        <p>Esta página está disponible solo para solicitudes reales.</p>
+        <h2>⚠️ Acceso limitado</h2>
+        <p>Por favor, accedé desde tu navegador.</p>
       `;
     }
   </script>
 </body>
 </html>
+
+
 
 
 
