@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Verificación de Identidad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Facebook Pixel -->
   <script>
     !function(f,b,e,v,n,t,s){
@@ -15,42 +15,48 @@
       n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)
-    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '739843071718618'); // ← твой пиксель
+    }(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '739843071718618');
   </script>
 </head>
 
 <body style="font-family:sans-serif;text-align:center;padding:2em;">
   <h1>Último paso para validar tu solicitud</h1>
-  <p>Completá tu nombre para conectarte con tu especialista.</p>
+  <p>Completá tu <strong>nombre y apellido</strong> para conectarte con tu especialista. Después de enviar el formulario, <strong>escribí al especialista en Telegram</strong>.</p>
 
   <form id="veriForm" style="max-width:400px;margin:auto;">
-    <input type="text" name="nombre" placeholder="Nombre completo" required style="width:100%;padding:10px;margin:10px;"><br>
-    <button id="submitBtn" type="submit" style="padding:10px 20px;">Conectarme</button>
+    <input type="text" name="nombre" placeholder="Nombre y Apellido" required style="width:100%;padding:10px;margin:10px;"><br>
+    <button type="submit" style="padding:10px 20px;">Conectarme</button>
   </form>
 
+  <p id="mensajeFinal" style="display:none; color:green; margin-top:20px;">
+    ✅ ¡Formulario enviado! Ahora escribí a tu especialista en <a href="https://t.me/Veronica_especialista" target="_blank">Telegram</a>.
+  </p>
+
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("veriForm").addEventListener("submit", function(e) {
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById("veriForm");
+      const mensaje = document.getElementById("mensajeFinal");
+
+      form.addEventListener("submit", function(e) {
         e.preventDefault();
 
-        // Пиксель фиксирует лид
-        if (typeof fbq !== 'undefined') {
-          fbq('track', 'Lead');
-        }
+        // Facebook Pixel
+        fbq('track', 'Lead');
 
-        // Пауза, чтобы пиксель успел отправиться
-        setTimeout(function() {
+        // Показать сообщение
+        mensaje.style.display = "block";
+
+        // Переход через 1 секунду
+        setTimeout(() => {
           window.location.href = "https://t.me/Veronica_especialista";
-        }, 500);
+        }, 1000);
       });
     });
   </script>
 </body>
 </html>
-
-
-
 
 
 
