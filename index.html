@@ -1,62 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Verificación de Identidad</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Veronica Accesible</title>
 
-  <!-- Facebook Pixel -->
+  <!-- Facebook Pixel Code -->
   <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '739843071718618');
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '747695917773528'); // ← ВСТАВЬ СВОЙ PIXEL ID
+    fbq('track', 'PageView');
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=747695917773528&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #0066cc;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #28a745;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    a.button:hover {
+      background-color: #218838;
+    }
+  </style>
 </head>
-
-<body style="font-family:sans-serif;text-align:center;padding:2em;">
-  <h1>Último paso para validar tu solicitud</h1>
-  <p>Completá tu <strong>nombre y apellido</strong> para conectarte con tu especialista. Después de enviar el formulario, <strong>escribí al especialista en Telegram</strong>.</p>
-
-  <form id="veriForm" style="max-width:400px;margin:auto;">
-    <input type="text" name="nombre" placeholder="Nombre y Apellido" required style="width:100%;padding:10px;margin:10px;"><br>
-    <button type="submit" style="padding:10px 20px;">Conectarme</button>
-  </form>
-
-  <p id="mensajeFinal" style="display:none; color:green; margin-top:20px;">
-    ✅ ¡Formulario enviado! Ahora escribí a tu especialista en <a href="https://t.me/Veronica_especialista" target="_blank">Telegram</a>.
-  </p>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById("veriForm");
-      const mensaje = document.getElementById("mensajeFinal");
-
-      form.addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        // Facebook Pixel
-        fbq('track', 'Lead');
-
-        // Показать сообщение
-        mensaje.style.display = "block";
-
-        // Переход через 1 секунду
-        setTimeout(() => {
-          window.location.href = "https://t.me/Veronica_especialista";
-        }, 1000);
-      });
-    });
-  </script>
+<body>
+  <div class="container">
+    <h1>Créditos 100% online</h1>
+    <p>Consultá con una asesora especializada y conocé las opciones que mejor se adapten a tu perfil.</p>
+    <p>Proceso digital, personalizado y acompañado paso a paso.</p>
+    <a href="https://t.me/Veronica_especialista" class="button" target="_blank">Consultar ahora</a>
+  </div>
 </body>
 </html>
+
 
 
 
