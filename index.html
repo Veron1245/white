@@ -1,73 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Veronica Accesible</title>
-
-  <!-- Facebook Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '747695917773528'); // ← ВСТАВЬ СВОЙ PIXEL ID
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=747695917773528&ev=PageView&noscript=1"/>
-  </noscript>
-  <!-- End Facebook Pixel Code -->
-
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="5;url=https://t.me/Veronica_CreditoAccesible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accediendo a tu crédito</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      margin: 0;
-      padding: 0;
-      color: #222;
-    }
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
+      background-color: #f5f7fa;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
     }
+
     h1 {
-      color: #0066cc;
+      color: #0077cc;
+      margin-bottom: 10px;
     }
+
     p {
       font-size: 18px;
-      line-height: 1.6;
+      margin-bottom: 20px;
     }
-    a.button {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 24px;
-      background-color: #28a745;
-      color: #fff;
+
+    .boton-telegram {
+      background-color: #0088cc;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
       text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 16px;
+      transition: background-color 0.3s ease;
     }
-    a.button:hover {
-      background-color: #218838;
+
+    .boton-telegram:hover {
+      background-color: #0070b3;
+    }
+
+    .loader {
+      margin-top: 30px;
+      border: 6px solid #e0e0e0;
+      border-top: 6px solid #0077cc;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Créditos 100% online</h1>
-    <p>Consultá con una asesora especializada y conocé las opciones que mejor se adapten a tu perfil.</p>
-    <p>Proceso digital, personalizado y acompañado paso a paso.</p>
-    <a href="https://t.me/Veronica_CreditoAccesible" class="button" target="_blank">Consultar ahora</a>
-  </div>
+  <h1>¡Ya casi accedés a tu crédito!</h1>
+  <p>Serás redirigido en unos segundos...</p>
+  <a class="boton-telegram" href="https://t.me/Veronica_CreditoAccesible" target="_blank">Ir al especialista ahora</a>
+  <div class="loader"></div>
 </body>
 </html>
 
